@@ -357,3 +357,178 @@ const atLeastOnePositive = list.some(function(value){
 //the function return a true or false depending on the input array
 console.log(allPositive);
 
+//filter an array,using rollback function
+const list2 = [1,2,3,4.-1];
+const filtered = list2.filter(function(value){
+    return value >= 0;
+});
+console.log(filtered);
+
+//mapping an array
+const items = filtered.map(function(value){
+    return '<li>' + value + '</li>';
+});
+
+const html = '<ul>' + items.join('') + '</ul>';
+console.log(html);
+
+//chaining
+const list3 = [1,-1,2,3];
+const items2 = list3
+    .filter(n => n >= 0)
+    .map(n => ({value: n}))
+    .filter(obj => obj.value > 1)
+    .map(obj => obj.value);
+
+console.log(items2);
+
+//reducing an array
+let sum1 = 0;
+for(let n of list3)
+    sum1 += n;
+console.log(sum);
+
+//accumulator is simlar to the sum, initialize to 0
+const total = list3.reduce((accumulator,currentValue) => accumulator + currentValue);
+
+//exercise1
+
+function arrayFromRange(min,max) {
+    const integers = [];
+    for(let i = min; i<= max;i++ ){
+        integers.push(i);
+    }
+    return integers;
+};
+
+
+const integers = arrayFromRange(2,7);
+console.log(integers);
+
+//exercise2
+const array1 = [1,2,3,4];
+function includeInArray(array,n){
+    for(let i of array)
+        if(i === n) {
+            return true
+        } return false;
+}
+
+console.log(includeInArray(array1,5));
+
+//exercise 3
+const array2 = [1,2,3,4,1,1];
+const output2 = except(array2,[1,2]);
+console.log(output2);
+
+function except(array,excluded){
+    const result = [];
+    for(let element of array)
+        if(!excluded.includes(element))
+            result.push(element);
+        
+return result;
+}
+
+//exercise 4
+const array3 = [1,2,3,4];
+const output3 = move(array3, 0,3);
+console.log(output3);
+
+function move(array,index,offset){
+    if(index+offset > array3.length-1 || offset < 0){
+        console.error("Invalid offset");
+        return ;
+    }
+        let hold = array[index];
+        for(let i=index+1;i<= index+offset;i++)
+            array[i-1] = array[i];
+        array[index+offset]=hold;
+    return array;
+
+}
+//using splice
+function move(array,index,offset){
+    const position = index + offset;
+    if(position >= array.length || position < 0){
+        console.error("Invalid offset");
+        return ;
+    }
+    const output = [...array]; //spread the array
+    const element = output.splice(index,1)[0];
+    output.splice(position,0,element);
+    return output;
+}
+
+//exercise 5
+const arr = [1,1,2,1,3,4,5,5];
+const count = countOcuurences(arr,1);
+console.log(count);
+
+function countOcuurences(array,searchElement){
+    let count = 0;
+    for(let i of array){
+        if(i === searchElement)
+        count++;
+    }
+    return count;
+}
+
+//using reduce method
+function countOcuurences(array,searchElement){
+    return array.reduce((accumulator,currentValue) => {
+        const occurence = (currentValue === searchElement) ? 1 : 0;
+        return accumulator + occurence;
+    },0);
+};
+
+//exercise 6
+const maxx = getMax(arr);
+console.log(maxx);
+function getMax(array){
+    if(array.length === 0) return undefined;
+    let maxx = array[0];
+    for(let i of array)
+        if(i>maxx)
+        maxx = i;
+    return maxx;
+}
+
+// using reduce method
+array.reduce((accumulator,current) => {
+    if(current > accumulator) return current;
+    return accumulator;
+});
+
+//look simply
+//array.reduce((a,b) => (b > a) ? b : a );
+
+//exercise 7
+const movies = [
+    {title: 'b', year: 2018, rating:4.5},
+    {title: 'a', year: 2018, rating:4.7},
+    {title: 'c', year: 2018, rating:3},
+    {title: 'd', year: 2017, rating:4.7},
+
+
+]
+console.log(movieFilter(movies));
+
+function movieFilter(movies){
+    let filtered = [];
+    for(let movie of movies)
+        if(movie.year === 2018 && movie.rating > 4)
+            filtered.push(movie);
+    filtered.sort(movie.name);
+    return filtered;
+};
+
+const titles = 
+movies
+    .filter(m => m.year === 2018 && m.rating >= 4)
+    .sort((a,b) => a.rating - b.rating)
+    .reverse()
+    .map(m => m.title)
+
+console.log(titles);
+    
