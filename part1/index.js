@@ -344,7 +344,7 @@ courses.sort(function(a,b){
 
 
 console.log(courses);
-
+list = [1,2,3,4,5];
 //testing values, using a callback function
 const allPositive = list.every(function(value) {
 const list = [1,2,3];
@@ -532,3 +532,4 @@ movies
 
 console.log(titles);
     
+
